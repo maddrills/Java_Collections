@@ -1,9 +1,7 @@
 package dev.lpa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -57,5 +55,40 @@ public class Main {
         for (int i = 0; i < 15; i++) {
             System.out.println(bingoPool.get(i));
         }
+
+//        the streams interface works on any class that implements the colections interfce
+
+        String[] strings = {"One", "Two", "Three"};
+
+    var firstStream = Arrays.stream(strings)
+                .sorted(Comparator.reverseOrder());
+                //.forEach(System.out::println);
+            /* Two
+                Three
+        One
+                */
+
+
+//   You can also do this it does the same as obove
+    var secondStream = Stream.of("Six", "Five", "Four")
+                .map(String::toUpperCase);
+                //.forEach(System.out::print);
+        //SIX FIVE FOUR
+
+
+        Stream.concat(secondStream, firstStream)
+                .map(s -> s.charAt(0) + " - " + s)
+                .forEach(System.out::println);
+
+        /*
+        * S - SIX
+        F - FIVE
+        F - FOUR
+        T - Two
+        T - Three
+        O - One*/
+
+        
     }
+
 }
